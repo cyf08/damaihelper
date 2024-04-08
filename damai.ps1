@@ -1,0 +1,1 @@
+Start-Process powershell -Verb runAs -ArgumentList "-Command ""cd 'E:\code\damaihelper'; conda activate damai; python main.py"""

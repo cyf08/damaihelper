@@ -139,7 +139,7 @@ class Concert(object):
             # 确认页面刷新成功
             try:
                 box = WebDriverWait(self.driver, 3, 0.1).until(
-                    EC.presence_of_element_located((By.ID, 'app')))
+                    EC.presence_of_element_located((By.ID, 'root')))
             except:
                 raise Exception(u"***Error: 页面刷新出错***")
 
@@ -154,6 +154,7 @@ class Concert(object):
                 raise Exception(u"***Error: 实名制遮罩关闭失败***")
 
             try:
+                sleep(3)
                 buybutton = box.find_element(by=By.CLASS_NAME, value='buy__button')
                 sleep(0.5)
                 buybutton_text: str = buybutton.text
@@ -230,7 +231,7 @@ class Concert(object):
 
                 price_list = price.find_elements(
                     by=By.CLASS_NAME, value='bui-dm-sku-card-item')  # 选定票档
-                # print('可选票档数量为：{}'.format(len(price_list)))
+                print('可选票档数量为：{}'.format(len(price_list)))
                 for i in self.price:
                     if i > len(price_list):
                         i = len(price_list)
@@ -256,6 +257,7 @@ class Concert(object):
 
 
                 try:
+                    sleep(1)
                     WebDriverWait(self.driver, 2, 0.1).until(
                     EC.presence_of_element_located((By.CLASS_NAME, 'bui-dm-sku-counter')))
                 except:
@@ -307,9 +309,9 @@ class Concert(object):
                 sleep(0.05)
 
             WebDriverWait(self.driver, 5, 0.1).until(
-                EC.presence_of_element_located((By.XPATH, '//*[@id="dmOrderSubmitBlock_DmOrderSubmitBlock"]/div[2]/div/div[2]/div[3]/div[2]')))
+                EC.presence_of_element_located((By.XPATH, '//*[@id="dmOrderSubmitBlock_DmOrderSubmitBlock"]/div[2]/div/div[2]/div[2]/div[2]')))
             comfirmBtn = self.driver.find_element(
-                By.XPATH, '//*[@id="dmOrderSubmitBlock_DmOrderSubmitBlock"]/div[2]/div/div[2]/div[3]/div[2]')
+                By.XPATH, '//*[@id="dmOrderSubmitBlock_DmOrderSubmitBlock"]/div[2]/div/div[2]/div[2]/div[2]')
             sleep(0.5)
             comfirmBtn.click()
             # 判断title是不是支付宝
